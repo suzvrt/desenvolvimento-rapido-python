@@ -1,0 +1,71 @@
+estoque = {}
+
+
+def adicionar_produto():
+    """Adiciona um novo produto ao estoque"""
+    produto = input("Nome do produto: ").strip().title()
+    quantidade = int(input("Quantidade inicial: "))
+    estoque[produto] = quantidade
+    print(f"{produto} adicionado com {quantidade} unidades.")
+
+
+def ver_estoque():
+    """Exibe todos os produtos e quantidades"""
+    print("\nEstoque atual:")
+    if not estoque:
+        print("Estoque vazio.")
+    else:
+        for produto, quantidade in estoque.items():
+            print(f"{produto}: {quantidade} unidades")
+
+
+def atualizar_quantidade():
+    """Atualiza a quantidade de um produto existente"""
+    produto = input("Produto a atualizar: ").strip().title()
+    if produto in estoque:
+        nova_qtd = int(input("Nova quantidade: "))
+        estoque[produto] = nova_qtd
+        print(f"Estoque de {produto} atualizado para {nova_qtd}.")
+    else:
+        print("Produto não encontrado.")
+
+
+def verificar_disponibilidade():
+    """Verifica se o produto está disponível"""
+    produto = input("Produto a verificar: ").strip().title()
+    if produto in estoque:
+        if estoque[produto] > 0:
+            print(f"{produto} está disponível ({estoque[produto]} unidades).")
+        else:
+            print(f"{produto} está esgotado.")
+    else:
+        print("Produto não encontrado.")
+
+
+def menu():
+    """Exibe o menu e controla o fluxo principal"""
+    while True:
+        print("\n=== MENU ===")
+        print("1 - Adicionar produto")
+        print("2 - Ver estoque")
+        print("3 - Atualizar quantidade")
+        print("4 - Verificar disponibilidade")
+        print("5 - Sair")
+        opcao = input("Escolha uma opção: ")
+        if opcao == '1':
+            adicionar_produto()
+        elif opcao == '2':
+            ver_estoque()
+        elif opcao == '3':
+            atualizar_quantidade()
+        elif opcao == '4':
+            verificar_disponibilidade()
+        elif opcao == '5':
+            print("Encerrando o programa... ")
+            break
+        else:
+            print("Opção inválida! Tente novamente.")
+
+
+# Execução principal
+menu()
